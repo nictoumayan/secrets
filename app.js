@@ -60,12 +60,16 @@ app.post("/login", function(req,res){
   const password = req.body.password;
   User.findOne({email:userName}, function(err, foundUser){
     if(err){
-      console.log(err);
+      res.render("error");
     }else{
       if(foundUser){
         if(foundUser.password === password){
           res.render("secrets");
+        }else{
+          res.render("error");
         }
+      }else{
+        res.render("error");
       }
     }
   })
